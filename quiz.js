@@ -1,28 +1,28 @@
 const questions = [
     {
         id: 1,
-        text: "Durante uma abordagem na BR-116, o condutor apresenta nermosismo excessivo. Qual sua PRIMEIRA atitude tática?",
+        text: "Durante uma abordagem na BR-116, o condutor apresenta nervosismo excessivo e evita contato visual. Qual sua PRIMEIRA atitude tática de segurança?",
         options: [
-            { text: "Realizar busca veicular imediatamente", correta: false, feedback: "Errado. Primeiro você deve garantir a segurança do perímetro e verbalizar." },
-            { text: "Verbalizar e controlar as mãos do suspeito", correta: true, feedback: "Correto! Controle das mãos é prioridade absoluta para segurança do agente." },
-            { text: "Solicitar documentos do veículo", correta: false, feedback: "Perigoso. Se ele estiver armado, pedir documentos tira sua atenção das mãos dele." }
+            { text: "Iniciar busca veicular imediatamente", correta: false, feedback: "Erro Crítico. Jamais inicie a busca sem antes controlar o suspeito e o perímetro. Risco de emboscada." },
+            { text: "Verbalizar comando de voz e controlar as mãos do suspeito", correta: true, feedback: "Correto! O controle das mãos é a regra de ouro. Mãos controladas não sacam armas." },
+            { text: "Solicitar CNH e documento do veículo", correta: false, feedback: "Arriscado. Ao focar nos documentos, você perde o visual das mãos do suspeito, onde está o perigo." }
         ]
     },
     {
         id: 2,
-        text: "[CESPE/CEBRASPE] A 'crase' é facultativa antes de nomes próprios femininos. Essa afirmação é:",
+        text: "[CESPE] Acerca do emprego do acento grave, julgue o item: 'Refiro-me à Maria'. A crase é facultativa?",
         options: [
-            { text: "CERTO", correta: true, feedback: "Boa! Antes de nomes femininos (ex: refiro-me a(à) Maria), a crase é facultativa." },
-            { text: "ERRADO", correta: false, feedback: "Cuidado! Essa é uma regra clássica do CESPE. É facultativa sim." }
+            { text: "CERTO", correta: true, feedback: "Boa, 06! Antes de nomes próprios femininos, o artigo é opcional, logo a crase também é facultativa." },
+            { text: "ERRADO", correta: false, feedback: "Cuidado! Essa é clássica do CESPE. Antes de nomes femininos (Maria, Joana), a crase é sempre facultativa." }
         ]
     },
     {
         id: 3,
-        text: "Para ser aprovado na PRF, o que pesa mais na nota final?",
+        text: "Estrategicamente, qual matéria tem o maior peso na pontuação final da prova objetiva da PRF?",
         options: [
-            { text: "Legislação de Trânsito", correta: true, feedback: "Exato! Trânsito é o carro-chefe, com 30 questões na prova." },
-            { text: "Direito Penal", correta: false, feedback: "Importante, mas Trânsito tem peso 3x maior na prova." },
-            { text: "Português", correta: false, feedback: "Crucial para não ser eliminado, mas Trânsito tem mais volume." }
+            { text: "Legislação de Trânsito (CTB)", correta: true, feedback: "Exato! São 30 questões exclusivas. Quem não domina o CTB, não vira Policial Rodoviário Federal." },
+            { text: "Direito Penal e Processual", correta: false, feedback: "Importante para a prática, mas na prova, o CTB vale 3x mais pontos." },
+            { text: "Língua Portuguesa", correta: false, feedback: "Fundamental para não ser eliminado, mas o Trânsito é o fiel da balança para a classificação." }
         ]
     }
 ];
