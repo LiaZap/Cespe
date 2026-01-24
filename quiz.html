@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Tático PRF | Teste de Aptidão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Quiz Specific Overrides */
+        body { background: var(--navy-950); display: flex; flex-direction: column; min-height: 100vh; }
+        .quiz-container { max-width: 600px; margin: 0 auto; padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .quiz-header { text-align: center; margin-bottom: 40px; }
+        .quiz-badge { background: var(--yellow-500); color: var(--navy-950); padding: 4px 12px; font-weight: 800; font-size: 0.8rem; border-radius: 2px; text-transform: uppercase; display: inline-block; margin-bottom: 16px; box-shadow: 0 0 15px rgba(255, 214, 0, 0.4); }
+        .quiz-progress { height: 6px; background: rgba(255,255,255,0.1); width: 100%; border-radius: 4px; overflow: hidden; margin-bottom: 24px; }
+        .quiz-bar { height: 100%; background: var(--green-500); width: 0%; transition: width 0.3s ease; box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+        
+        .quiz-card { background: var(--navy-900); border: 1px solid var(--navy-800); border-radius: 8px; padding: 32px; position: relative; overflow: hidden; }
+        .question-text { font-size: 1.25rem; font-weight: 700; color: var(--white); margin-bottom: 32px; line-height: 1.4; }
+        
+        .options-grid { display: grid; gap: 16px; }
+        .option-btn { background: var(--navy-950); border: 1px solid var(--navy-800); padding: 20px; text-align: left; color: var(--gray-400); font-weight: 600; border-radius: 4px; cursor: pointer; transition: all 0.2s; position: relative; }
+        .option-btn:hover { border-color: var(--yellow-500); color: var(--white); background: rgba(255, 214, 0, 0.05); }
+        
+        /* Feedback States */
+        .option-btn.correct { border-color: var(--green-500); background: rgba(16, 185, 129, 0.1); color: var(--white); }
+        .option-btn.wrong { border-color: var(--red-500); background: rgba(239, 68, 68, 0.1); color: var(--white); }
+        
+        /* Dopamine Effects */
+        .streak-counter { position: fixed; top: 20px; right: 20px; font-family: var(--font-mono); color: var(--yellow-500); font-weight: 800; display: none; }
+        
+        /* Result Screen */
+        .result-screen { text-align: center; display: none; animation: fadeIn 0.5s ease; }
+        .score-circle { width: 120px; height: 120px; border: 4px solid var(--green-500); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 900; color: var(--white); margin: 0 auto 24px; box-shadow: 0 0 30px rgba(16, 185, 129, 0.3); }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="streak-counter">🔥 x<span id="streakVal">0</span></div>
+
+    <div class="quiz-container">
+        
+        <!-- INTRO SCREEN -->
+        <div id="introScreen" class="quiz-card text-center" style="text-align: center;">
+            <div class="quiz-badge">DESAFIO TÁTICO</div>
+            <h1 style="font-size: 2rem; margin-bottom: 16px; line-height: 1.1;">VOCÊ TEM PERFIL PARA A PRF?</h1>
+            <p style="color: var(--gray-400); margin-bottom: 32px;">Responda 3 questões táticas e descubra se você está pronto para vestir a farda.</p>
+            <button onclick="startQuiz()" class="btn btn-primary btn-full pulse-btn">INICIAR MISSÃO</button>
+        </div>
+
+        <!-- GAME SCREEN -->
+        <div id="gameScreen" style="display: none;">
+            <div class="quiz-header">
+                <div class="quiz-progress"><div class="quiz-bar" id="progressBar"></div></div>
+                <div style="font-family: var(--font-mono); color: var(--gray-400); font-size: 0.8rem;">QUESTÃO <span id="qCurrent">1</span>/3</div>
+            </div>
+            
+            <div class="quiz-card">
+                <div id="questionText" class="question-text">Carregando missão...</div>
+                <div id="optionsGrid" class="options-grid">
+                    <!-- Options injected by JS -->
+                </div>
+                <div id="feedbackArea" style="display:none; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1);">
+                    <p id="feedbackText" style="font-size: 0.9rem; color: var(--gray-400); margin-bottom: 16px;"></p>
+                    <button id="nextBtn" onclick="nextQuestion()" class="btn btn-sm btn-primary" style="width: 100%;">PRÓXIMA</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULT SCREEN -->
+        <div id="resultScreen" class="result-screen">
+            <div class="score-circle" id="finalScore">0%</div>
+            <h2 style="font-size: 1.8rem; margin-bottom: 16px;">ANÁLISE CONCLUÍDA</h2>
+            <p id="resultMsg" style="color: var(--gray-400); margin-bottom: 32px; font-size: 1rem;">Seu raciocínio é bom, mas faltou malícia de prova.</p>
+            
+            <div style="background: rgba(255,214,0,0.1); border: 1px solid var(--yellow-500); padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+                <p style="color: var(--yellow-500); font-weight: 800; font-size: 0.9rem; margin-bottom: 8px;">🎁 RECOMENDAÇÃO TÁTICA</p>
+                <p style="color: var(--white); font-size: 0.9rem;">Liberamos uma oferta exclusiva para você fechar as lacunas do seu estudo.</p>
+            </div>
+
+            <a href="index.html#precos" class="btn btn-primary btn-full pulse-btn">VER OFERTA DESBLOQUEADA</a>
+        </div>
+
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
