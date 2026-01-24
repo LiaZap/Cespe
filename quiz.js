@@ -50,6 +50,7 @@ let score = 0;
 let streak = 0;
 
 function startQuiz() {
+    playSound('start');
     document.getElementById('introScreen').style.display = 'none';
     document.getElementById('gameScreen').style.display = 'block';
     loadQuestion();
@@ -129,7 +130,7 @@ function playSound(type) {
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.3);
-    } else {
+    } else if (type === 'error') {
         // Low Pitch "Buzz" (Error Sound)
         osc.type = 'sawtooth';
         osc.frequency.setValueAtTime(150, audioCtx.currentTime);
@@ -138,6 +139,16 @@ function playSound(type) {
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.2);
+    } else if (type === 'start') {
+        // Tactical "Whoosh/Charge" Sound
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(200, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.3);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.1);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.4);
     }
 }
 
