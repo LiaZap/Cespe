@@ -8,7 +8,15 @@
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Quiz Specific Overrides */
-        body { background: var(--navy-950); display: flex; flex-direction: column; min-height: 100vh; }
+        body { 
+            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.95)), url('images/quiz-bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh; 
+        }
         .quiz-container { max-width: 600px; margin: 0 auto; padding: 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
         .quiz-header { text-align: center; margin-bottom: 40px; }
         .quiz-badge { background: var(--yellow-500); color: var(--navy-950); padding: 4px 12px; font-weight: 800; font-size: 0.8rem; border-radius: 2px; text-transform: uppercase; display: inline-block; margin-bottom: 16px; box-shadow: 0 0 15px rgba(255, 214, 0, 0.4); }

@@ -24,6 +24,24 @@ const questions = [
             { text: "Direito Penal e Processual", correta: false, feedback: "Importante para a prática, mas na prova, o CTB vale 3x mais pontos." },
             { text: "Língua Portuguesa", correta: false, feedback: "Fundamental para não ser eliminado, mas o Trânsito é o fiel da balança para a classificação." }
         ]
+    },
+    {
+        id: 4,
+        text: "Sobre Geopolítica Brasileira: A expansão da fronteira agrícola para a região Norte gera conflitos fundiários. A atuação da PRF nesse contexto foca principalmente em:",
+        options: [
+            { text: "Fiscalização ambiental e crimes de trânsito em rodovias federais", correta: true, feedback: "Correto. O foco é a rodovia (transporte de madeira ilegal, tráfico), atuando em conjunto com Ibama/PF." },
+            { text: "Reforma agrária e distribuição de terras", correta: false, feedback: "Errado. Isso é competência do INCRA. A PRF atua na segurança viária e combate ao crime." },
+            { text: "Mediação de conflitos indígenas dentro das aldeias", correta: false, feedback: "Errado. Isso é atribuição primária da FUNAI e PF. A PRF foca no patrulhamento das BRs que cortam essas áreas." }
+        ]
+    },
+    {
+        id: 5,
+        text: "[Direitos Humanos] Um policial, durante prisão em flagrante, algema o suspeito. Segundo a Súmula Vinculante 11 do STF, o uso de algemas é:",
+        options: [
+            { text: "Sempre obrigatório para segurança", correta: false, feedback: "Errado. O uso não é irrestrito. Precisa de justificativa por escrito (perigo, fuga ou resistência)." },
+            { text: "Excepcional e deve ser justificado", correta: true, feedback: "Exato! A regra é a não utilização. Só pode usar em casos de resistência, receio de fuga ou perigo à integridade." },
+            { text: "Proibido em qualquer hipótese", correta: false, feedback: "Errado. É permitido, mas deve ser a exceção, não a regra." }
+        ]
     }
 ];
 
