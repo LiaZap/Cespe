@@ -294,6 +294,10 @@ function playSound(type) {
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.3);
+        
+        // Haptic Feedback (Mobile)
+        if (navigator.vibrate) navigator.vibrate(50); // Light tap
+        
     } else if (type === 'error') {
         // Low Pitch "Buzz" (Error Sound)
         osc.type = 'sawtooth';
@@ -303,6 +307,10 @@ function playSound(type) {
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.2);
+        
+        // Haptic Feedback (Mobile)
+        if (navigator.vibrate) navigator.vibrate([100, 50, 100]); // Double buzz
+        
     } else if (type === 'start') {
         // Tactical "Whoosh/Charge" Sound
         osc.type = 'triangle';
@@ -313,6 +321,9 @@ function playSound(type) {
         gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.4);
         osc.start();
         osc.stop(audioCtx.currentTime + 0.4);
+        
+        // Haptic Feedback (Mobile)
+        if (navigator.vibrate) navigator.vibrate(100); // Single confirm
     }
 }
 

@@ -81,6 +81,7 @@ a { text-decoration: none; color: inherit; }
     border-radius: var(--radius-sharp);
     transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Spring */
     cursor: pointer;
+    touch-action: manipulation; /* Mobile: Removes 300ms tap delay */
 }
 
 .btn-primary {
