@@ -88,13 +88,14 @@ function checkAnswer(index, btnElement) {
         score++;
         streak++;
         updateStreak();
-        // Play Dopamine Sound (Optional visual cue)
         btnElement.innerText += " ✅";
+        playSound('success');
     } else {
         btnElement.classList.add('wrong');
         streak = 0;
         updateStreak();
         btnElement.innerText += " ❌";
+        playSound('error');
         
         // Highlight correct
         q.options.forEach((opt, i) => {
@@ -105,6 +106,39 @@ function checkAnswer(index, btnElement) {
     // Show Feedback
     document.getElementById('feedbackText').innerText = q.options[index].feedback;
     document.getElementById('feedbackArea').style.display = 'block';
+}
+
+// DOPAMINE SOUND ENGINE (Web Audio API)
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playSound(type) {
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+    
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    
+    if (type === 'success') {
+        // High Pitch "Ding" (Coin Sound)
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.1);
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+    } else {
+        // Low Pitch "Buzz" (Error Sound)
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime);
+        osc.frequency.linearRampToValueAtTime(100, audioCtx.currentTime + 0.2);
+        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.2);
+    }
 }
 
 function updateStreak() {
