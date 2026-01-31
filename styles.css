@@ -1317,3 +1317,105 @@ a { text-decoration: none; color: inherit; }
 @media (min-width: 769px) {
     .sticky-mobile-bar { display: none; }
 }
+
+/* =========================================
+   FOMO NOTIFICATIONS
+   ========================================= */
+#fomo-container {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    pointer-events: none; /* Let clicks pass through */
+}
+
+.fomo-notification {
+    background: rgba(15, 23, 42, 0.95); /* Slate 900 */
+    border: 1px solid var(--primary);
+    border-left: 4px solid var(--primary);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    min-width: 300px;
+    max-width: 350px;
+    transform: translateX(-150%);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(8px);
+}
+
+.fomo-notification.visible {
+    transform: translateX(0);
+}
+
+.fomo-icon {
+    width: 40px;
+    height: 40px;
+    background: rgba(234, 179, 8, 0.1); /* Yellow tint */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+}
+
+.fomo-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.fomo-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.fomo-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--white);
+    font-family: var(--font-sans);
+}
+
+.fomo-text {
+    font-size: 0.75rem;
+    color: var(--gray-400);
+    margin-top: 2px;
+}
+
+.fomo-text strong {
+    color: var(--primary);
+}
+
+.fomo-time {
+    font-size: 0.65rem;
+    color: var(--gray-500);
+    margin-top: 4px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    #fomo-container {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 1rem;
+        width: 90%;
+        align-items: center;
+    }
+    
+    .fomo-notification {
+        width: 100%;
+        max-width: 100%;
+        transform: translateY(150%); /* Slide up on mobile */
+    }
+    
+    .fomo-notification.visible {
+        transform: translateY(0);
+    }
+}
