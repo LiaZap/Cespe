@@ -5,8 +5,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     initStickyBar();
     initCountdown();
-    initExitIntent();
+    // initExitIntent(); // Handled by exit-intent.js now
     initSmoothScroll();
+    initMetaTracking();
 });
 
 // 1. Sticky Mobile Bar Logic
@@ -81,4 +82,28 @@ function initSmoothScroll() {
             }
         });
     });
+}
+
+// 5. Advanced Meta Tracking
+function initMetaTracking() {
+    // 5.1 InitiateCheckout (Kiwify Button Clicks)
+    const buyButtons = document.querySelectorAll('a[href*="kiwify"]');
+    buyButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (typeof fbq === 'function') {
+                fbq('track', 'InitiateCheckout');
+                console.log('FBQ: InitiateCheckout fired');
+            }
+        });
+    });
+
+    // 5.2 Tactical Interactions (Optional)
+    const heroBtn = document.querySelector('.hero-actions .btn-primary');
+    if (heroBtn) {
+        heroBtn.addEventListener('click', () => {
+            if (typeof fbq === 'function') {
+                fbq('track', 'ViewContent', { content_name: 'Hero CTA Click' });
+            }
+        });
+    }
 }

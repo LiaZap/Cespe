@@ -364,4 +364,15 @@ function showResult() {
     } else {
         msg.innerText = "ATENÇÃO! Sua base precisa de reforço urgente antes do edital sair.";
     }
+
+    // FIRE FACEBOOK PIXEL LEAD
+    if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+            content_name: 'Quiz Completion',
+            status: percentage >= 60 ? 'qualified' : 'unqualified',
+            value: percentage,
+            currency: 'BRL' // Symbolic
+        });
+        console.log('FBQ: Lead fired');
+    }
 }
