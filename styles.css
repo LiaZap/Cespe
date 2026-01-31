@@ -1419,3 +1419,85 @@ a { text-decoration: none; color: inherit; }
         transform: translateY(0);
     }
 }
+
+/* =========================================
+   EXIT INTENT POPUP
+   ========================================= */
+.exit-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(2, 6, 23, 0.9); /* Navy 950 with opacity */
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.exit-modal-overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.exit-modal-card {
+    background: var(--navy-900);
+    border: 1px solid var(--yellow-500);
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    border-radius: var(--radius-hud);
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 50px rgba(255, 214, 0, 0.2);
+}
+
+.exit-modal-overlay.visible .exit-modal-card {
+    transform: translateY(0);
+}
+
+.exit-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: block;
+    animation: pulse 2s infinite;
+}
+
+.exit-title {
+    font-size: 1.8rem;
+    color: var(--white);
+    margin-bottom: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.exit-text {
+    color: var(--gray-400);
+    margin-bottom: 32px;
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.btn-close-modal {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    border: none;
+    color: var(--gray-400);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-close-modal:hover {
+    color: var(--white);
+}

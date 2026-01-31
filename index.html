@@ -457,7 +457,19 @@
         <a href="#precos" class="btn btn-sm btn-primary">GARANTIR COMBO</a>
     </div>
 
+    <!-- Exit Intent Modal -->
+    <div id="exitModal" class="exit-modal-overlay">
+        <div class="exit-modal-card">
+            <button id="closeExitModal" class="btn-close-modal">&times;</button>
+            <span class="exit-icon">⚠️</span>
+            <h2 class="exit-title">ESPERE! NÃO VÁ AINDA.</h2>
+            <p class="exit-text">Você está prestes a deixar sua aprovação para trás. Baixe agora um <strong>Mini-Simulado Gratuito</strong> (10 Questões Táticas) e teste seu nível.</p>
+            <a href="#" onclick="alert('PDF baixado com sucesso! (Simulação)'); document.getElementById('exitModal').classList.remove('visible'); return false;" class="btn btn-primary btn-full pulse-btn">BAIXAR SIMULADO GRÁTIS</a>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script src="exit-intent.js"></script>
     <script src="fomo.js"></script>
 </body>
 </html>
