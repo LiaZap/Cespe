@@ -30,6 +30,8 @@ function createNotification() {
     const location = getRandomElement(fomoConfig.locations);
     const product = getRandomElement(fomoConfig.products);
     
+const time = getRandomTime(); // Generate varied time
+    
     // Create notification element
     const notif = document.createElement('div');
     notif.className = 'fomo-notification';
@@ -42,7 +44,7 @@ function createNotification() {
         <div class="fomo-content">
             <span class="fomo-title">${name} de ${location}</span>
             <span class="fomo-text">Acabou de adquirir <strong>${product}</strong></span>
-            <span class="fomo-time">Agora mesmo</span>
+            <span class="fomo-time">${time}</span>
         </div>
     `;
 
@@ -60,6 +62,32 @@ function createNotification() {
             notif.remove();
         }, 300); // Wait for transition
     }, fomoConfig.displayDuration);
+}
+
+function getRandomTime() {
+    // Weighted random to feel natural
+    const times = [
+        { text: "Agora mesmo", weight: 4 },
+        { text: "há 2 minutos", weight: 3 },
+        { text: "há 5 minutos", weight: 3 },
+        { text: "há 12 minutos", weight: 2 },
+        { text: "há 25 minutos", weight: 2 },
+        { text: "há 45 minutos", weight: 2 },
+        { text: "há 1 hora", weight: 3 }, // Added weight
+        { text: "há 2 horas", weight: 2 },
+        { text: "há 3 horas", weight: 3 }, // User request
+        { text: "há 4 horas", weight: 1 },
+        { text: "Ontem", weight: 1 }
+    ];
+
+    const totalWeight = times.reduce((sum, item) => sum + item.weight, 0);
+    let random = Math.random() * totalWeight;
+
+    for (const time of times) {
+        if (random < time.weight) return time.text;
+        random -= time.weight;
+    }
+    return "Agora mesmo";
 }
 
 function scheduleNextNotification() {
